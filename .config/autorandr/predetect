@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+# A hacky solution to problems with VGA
+# Problem explanation:
+#   Whenever I would be using multiple screens
+#   one of them being on output VGA-1, and I would
+#   disconnect the VGA-1, the correct autorandr script
+#   would be run, but it wouldn't disable VGA-1 output,
+#   even though it would not be connected anymore.
+
+# The real issue here is that for some reason outputs just
+# just get disconnected instead of turned off
+
+# If problems persist run $ autorandr --change --force
+
+# Check if VGA-1 is causing troubles and turn it off.
+# It's xrandr's line is disconnected with active position.
+# This is what I'm grepping.
+if [ -n "$(xrandr | grep VGA-1 | grep 'disconnected ...\+ (normal')" ]; then
+    xrandr --output VGA-1 --off
+fi
+
+exit 0
