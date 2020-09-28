@@ -15,3 +15,4 @@ The dotfiles are for following programs:
 * newsboat (RSS reader)
 * compton (compositor)
 * zathura (pdf reader)
+* autorandr (screen layout manager)
