@@ -1,0 +1,104 @@
+#            _     _       _
+#   _____  _| |__ | | ____| |_ __ ___
+#  / __\ \/ / '_ \| |/ / _` | '__/ __|
+#  \__ \>  <| | | |   < (_| | | | (__
+#  |___/_/\_\_| |_|_|\_\__,_|_|  \___|
+
+# Here are keybinds that were migrated here from i3wm
+# for better extensibility and for potential usage in other wms
+
+# DROPDOWNS - SCRATCHPADS =======================
+super + shift + minus
+	pavucontrol
+
+super + shift + y
+	gnome-calculator --class=Calculator
+
+super + shift + t
+	signal-desktop
+
+# MISC ==========================================
+# Create a qr code for whatever is in clipboard and display it.
+super + F1
+	xclip -o | qr > /tmp/xclip-qr.png && notify-send -t 5000 'fehQR' "$(xclip -o)" && feh --title 'fehqr' /tmp/xclip-qr.png
+
+# Hide mouse cursor
+super + q
+	xdotool mousemove 2000 2000
+
+# Screenshot all screens.
+super + shift + b
+	scrot ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%T').png
+
+# Screenshot with selection: @ makes it active upon release
+@super + b
+	scrot --select ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%T').png && feh --title "fehscrot" ~/Pictures/Screenshots/$(ls -t ~/Pictures/Screenshots/ | head -1)
+
+# If monitors are fucked you can do it 'manually'
+super + shift + s
+	set-default-monitor
+#
+# Screen Layout: autorandr is acting up on VGA-1 screen
+# So I need this to fix it.
+super + control + s
+	autorandr --change --force
+
+# Highlight area
+super + control + h
+	highlighter
+
+# BROWSERS ======================================
+# This was moved back to ~/.config/i3/config because it doesn't focus
+# properly when launched with sxhkd.
+# super + c
+#     firefox
+
+super + c + { ,control,shift,alt}
+	{brave-browser,qutebrowser,chromium,firefox}
+
+
+# VOLUME CONTROL ================================
+{XF86AudioLowerVolume,XF86AudioRaiseVolume,XF86AudioMute}
+	volume {-5%,+5%,mute} && pkill -RTMIN+4 i3blocks
+	# volume {-5%,+5%,mute} && pkill -RTMIN+4 i3blocks
+
+# BRIGHTNESS ====================================
+{XF86MonBrightnessDown,XF86MonBrightnessUp}
+	light {-U 10,-A 10} && pkill -RTMIN+3 i3blocks
+
+super + {bracketleft,bracketright}
+	light {-U 10,-A 10} && pkill -RTMIN+3 i3blocks
+
+super + shift + {bracketleft,bracketright}
+	light {-S 0.2,-S 100} && pkill -RTMIN+3 i3blocks
+
+# TERMINAL ======================================
+super + Return
+	gnome-terminal --window-with-profile='normal-dark'
+
+super + shift + u
+	gnome-terminal --title='dropdown-terminal' --window-with-profile='dropdown-dark'
+
+super + s
+	export EDITOR='nvim' && kitty vimclip
+
+# ROFI ==========================================
+# Rofi for switching windows
+alt + d
+	rofi -show window -modi window -show-icons -matching normal -monitor -1 -lines 5
+
+# Rofi for switching windows
+super + shift + d
+	rofi -show window -modi window -show-icons -matching normal -monitor -1 -lines 5
+
+# Rofi for executing scripts
+super + d
+	rofi -show run -modi run -show-icons -matching fuzzy -monitor -1 -lines 5
+
+super + control + d
+	dmenu_run
+
+# TEST CONFIG ===================================
+# BSPWM
+super + control + {q,r}
+	bspc {quit,wm -r}

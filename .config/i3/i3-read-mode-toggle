@@ -1,0 +1,23 @@
+#!/bin/env python3
+
+# Sets side (horizontal) gaps wide enough
+# that a single window in the middle would
+# have aspect ratio roughly that of a4 paper.
+
+import i3ipc
+
+# Initiate library.
+i3 = i3ipc.Connection()
+
+# Dimensions of focused workspace.
+dim_ws = i3.get_tree().find_focused().workspace().rect
+ws_width = dim_ws.width
+ws_height = dim_ws.height
+
+# Calculate approprite gap size (depends on monitor aspect ratio).
+gap_size = (ws_width - 20 - ((ws_height - 40) / 1.35)) // 2
+
+# Toggle gaps.
+# Widescreen monitors turned sideways could cause problems.
+if gap_size > 0:
+    i3.command('gaps horizontal current toggle {}'.format(gap_size))

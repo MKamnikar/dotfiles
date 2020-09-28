@@ -1,0 +1,45 @@
+#           _   _
+#  ______ _| |_| |__  _   _ _ __ __ _ _ __ ___
+# |_  / _` | __| '_ \| | | | '__/ _` | '__/ __|
+#  / / (_| | |_| | | | |_| | | | (_| | | | (__
+# /___\__,_|\__|_| |_|\__,_|_|  \__,_|_|  \___|
+
+# See man page 'man zathurarc'.
+
+# Let pages breathe a little.
+set page-padding 5
+# But not too much.
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+
+# True black is too dark.
+set default-bg "#070707"
+set default-fg "#FFFFFF"
+
+# Shows you name of the file.
+set statusbar-bg "#070707"
+set statusbar-fg "#cecece"
+
+# Inputbar opens with ':'.
+# You can hide it with '<C-m>'.
+set inputbar-bg "#070707"
+set inputbar-fg "#cecece"
+
+# Highlight when searching.
+set highlight-color "#83a598"
+set highlight-active-color "#076678"
+
+map F toggle_fullscreen
+map [fullscreen] F toggle_fullscreen
+
+# Invert colors '<C-r>' or 'i'.
+map i recolor
+set recolor "true"                      # Opens new instances in dark-mode
+set recolor-lightcolor "#0c0c0c"        # The color in which white gets transformed - DARK GREY
+set recolor-darkcolor "#cecece"         # The color in which black gets transformed
+set recolor-reverse-video "false"
+set recolor-keephue "true"
+
+# Mappings.
+map <C-k> zoom in
+map <C-j> zoom out

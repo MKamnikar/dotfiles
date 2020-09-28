@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# Moves container to chosen workspace.
+# Usefull when workspace you want to move containers to is greater than 10
+# and there are no bindings to do it for you.
+
+NUMBER=$(rofi -dmenu -monitor -2 -p "Enter workspace number" -lines 0)
+
+if [[ -n "$NUMBER" ]]; then
+    i3-msg move container to workspace "$NUMBER"
+fi
